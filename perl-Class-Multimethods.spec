@@ -1,19 +1,18 @@
 %define upstream_name    Class-Multimethods
 %define upstream_version 1.70
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 2
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	3
 
-Summary:    A multiple dispatch mechanism for Perl
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/Class/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	A multiple dispatch mechanism for Perl
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/Class/%{upstream_name}-%{upstream_version}.tar.gz
 
-
-BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildArch:	noarch
 
 %description
 The Class:Multimethod module exports a subroutine (&multimethod) that can
@@ -38,24 +37,29 @@ multimethod manpage for a definition of "closest").
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
-
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc Changes README
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
+
+%changelog
+* Mon Apr 18 2011 Funda Wang <fwang@mandriva.org> 1.700.0-2mdv2011.0
++ Revision: 654894
+- rebuild for updated spec-helper
+
+* Thu May 06 2010 Michael Scherer <misc@mandriva.org> 1.700.0-1mdv2011.0
++ Revision: 542857
+- import perl-Class-Multimethods
 
 
+* Thu May 06 2010 cpan2dist 1.70-1mdv
+- initial mdv release, generated with cpan2dist
