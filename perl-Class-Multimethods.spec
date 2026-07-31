@@ -2,8 +2,8 @@
 %define upstream_version 1.701
 
 Name:		perl-%{upstream_name}
-Version:	1.700
-Release:	2
+Version:	1.701
+Release:	1
 
 Summary:	A multiple dispatch mechanism for Perl
 License:	GPL+ or Artistic
